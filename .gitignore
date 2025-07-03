@@ -1,0 +1,5 @@
+node_modules
+.env
+.env.*  # catch any extra env files
+dockerignore
+*.log

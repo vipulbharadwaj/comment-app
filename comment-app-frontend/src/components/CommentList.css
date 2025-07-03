@@ -1,0 +1,86 @@
+.comment-list {
+  margin-top: 20px;
+}
+
+.comment-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.comment-item .avatar {
+  width: 35px;
+  height: 35px;
+  background-color: #4267b2;
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  line-height: 35px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.comment-content {
+  background-color: #f0f2f5;
+  padding: 12px 16px;
+  border-radius: 12px;
+  max-width: 600px;
+  width: fit-content;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.comment-content .header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.comment-content .timestamp {
+  color: #888;
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+.comment-content .text {
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+
+.comment-content .actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.comment-content .reply-btn {
+  background: none;
+  border: none;
+  color: #385898;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+}
+
+.comment-content .reply-btn:hover {
+  text-decoration: underline;
+}
+
+.comment-content .reply-btn.danger {
+  color: #e53935;
+}
+
+
+.comment-item.level-1 {
+  margin-left: 40px;
+}
+
+.comment-item.level-2 {
+  margin-left: 80px;
+}
+
+.comment-item.level-3 {
+  margin-left: 120px;
+}
