@@ -4,17 +4,22 @@ import API from '../util/api';
 import './CommentList.css';
 import { jwtDecode } from 'jwt-decode';
 
-
 const token = localStorage.getItem('token');
 const currentUser = token ? jwtDecode(token) : null;
 
 console.log('Current User:', currentUser);
 
 const Comment = ({ comment, refresh, level = 0 }) => {
+  if (!comment) return null;
+
   const [replying, setReplying] = useState(false);
   const [editing, setEditing] = useState(false);
 
-  const isOwner = currentUser?.id === comment.userId?._id;
+const commentUserId = typeof comment.userId === 'string' ? comment.userId : comment.userId?._id;
+const isOwner = currentUser?.id === commentUserId;
+
+
+
 
   const handleReply = async (text) => {
     await API.post('/comments', { text, parentId: comment._id });
@@ -27,18 +32,18 @@ const Comment = ({ comment, refresh, level = 0 }) => {
     setEditing(false);
     refresh();
   };
-const handleDelete = async () => {
-  if (window.confirm('Delete this comment?')) {
-    try {
-      await API.delete(`/comments/${comment._id}`);
-      refresh();
-    } catch (err) {
-      console.error('Delete failed:', err);
-      alert('Failed to delete comment');
-    }
-  }
-};
 
+  const handleDelete = async () => {
+    if (window.confirm('Delete this comment?')) {
+      try {
+        await API.delete(`/comments/${comment._id}`);
+        refresh();
+      } catch (err) {
+        console.error('Delete failed:', err);
+        alert('Failed to delete comment');
+      }
+    }
+  };
 
   return (
     <div className={`comment-item level-${level}`}>
@@ -71,7 +76,7 @@ const handleDelete = async () => {
               {replying ? 'Cancel' : 'Reply'}
             </button>
 
-            {!isOwner && !editing && (
+            {isOwner && !editing && (
               <>
                 <button className="reply-btn" onClick={() => setEditing(true)}>Edit</button>
                 <button className="reply-btn danger" onClick={handleDelete}>Delete</button>
